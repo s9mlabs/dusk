@@ -1,6 +1,7 @@
 import copy
 import math
 import numpy as np
+from nexus.circuits.allpaths import measure_all_paths
 from nexus.circuits.probe import measure_circuit
 from nexus.score.recovery import CONTINUOUS_FIELDS
 
@@ -42,12 +43,12 @@ def datasheet_distance(a, b, config) -> float:
             worst = max(worst, abs(x - y) / (high - low))
     return worst
 
-def find_twin(spec, roles, datasheets, config, rng, workdir, circuit_id, tries=20, tol=0.1, sd=0.25) -> dict:
+def find_twin(spec, roles, datasheets, config, rng, workdir, circuit_id, tries=20, tol=0.1, sd=0.25, switch_type=None) -> dict:
     """Perturb the circuit until its measured datasheets match within tol, keeping the closest accepted candidate if none does."""
     best = None
     for k in range(tries):
         cand = perturb(spec, rng, circuit_id, sd)
-        m = measure_circuit(cand, roles, workdir / f"twin_{k}")
+        m = measure_all_paths(cand, roles, switch_type, workdir / f"twin_{k}")
         if not m["accepted"]:
             continue
         dist = datasheet_distance(datasheets, m["datasheets"], config)

@@ -389,8 +389,10 @@ This exact text, at the commit named when it is locked, needs both approvals.
   reported; tied priorities count as wrong. Section 5.1.
 - **Identifiability:** the method as built. Section 5.2.
 - **Twins (item 10):** tolerance, search settings and the no-twin rule. Section 5.4. The smaller
-  winner-take-all perturbation (0.10) and the 20 tries are proposals not yet tried; they are run on
-  training circuits before the lock, and if they change, this text changes before approval.
+  winner-take-all perturbation (0.10) and the 20 tries were tried on development circuits on
+  10 November 2026 (`logs/pilot/m3/wta_sd010.json`, `others_sd025.json`,
+  `shutoff_allpaths_sd025.json`): twins were found for 10 of 10 winner-take-all circuits and for
+  every accepted gain, release and global shutoff circuit (4, 4 and 5), using at most 13 tries.
 - **Prediction (items 6 and 8):** seed counts and the floor order. Section 5.6.
 - **NEURON check (item 12).** Section 6. The spike-time row is dropped, since no circuit spikes.
 - **Key holder and public key (item 14).** Section 7.

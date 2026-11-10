@@ -1464,3 +1464,11 @@ items 9, 17 and 18 to be settled before approval. `prereg/phase1-prereg-0.3.md` 
 version 0.3 that does this. It is not approved or locked yet. Writing it turned up a mismatch: the
 corruption code draws strength errors in natural-log units, while the text says log10. Version 0.3
 uses log10 and the code changes to match, pending approval.
+
+Code for version 0.3, written by the 7B on 10 November 2026 and not yet used to generate anything:
+`nexus/circuits/allpaths.py` measures every path a global shutoff controls and combines them
+(section 3 of version 0.3); the generator and the twin search now use it. The generator also writes
+half and double wiring error diagrams for each animal to a `.wiring_checks.json` file next to its
+recording, leaving the frozen file format alone. The twin survey takes the perturbation size as an
+argument. Tests: `tests/test_m3_allpaths.py` and the existing generator and twin tests pass
+(17 and 9). Still waiting on approval: strength errors in log10 units, and the two scoring fixes.

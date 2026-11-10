@@ -1,0 +1,92 @@
+[
+ {
+  "motif": "winner_take_all",
+  "seed": 0,
+  "sd": 0.1,
+  "found": true,
+  "tries": 1,
+  "distance": 0.08333333333333337,
+  "seconds": 40.69
+ },
+ {
+  "motif": "winner_take_all",
+  "seed": 1,
+  "sd": 0.1,
+  "found": true,
+  "tries": 1,
+  "distance": 0.01615872413954622,
+  "seconds": 39.19
+ },
+ {
+  "motif": "winner_take_all",
+  "seed": 2,
+  "sd": 0.1,
+  "found": true,
+  "tries": 2,
+  "distance": 0.06666666666666671,
+  "seconds": 64.12
+ },
+ {
+  "motif": "winner_take_all",
+  "seed": 3,
+  "sd": 0.1,
+  "found": true,
+  "tries": 4,
+  "distance": 0.05718862602891769,
+  "seconds": 72.62
+ },
+ {
+  "motif": "winner_take_all",
+  "seed": 4,
+  "sd": 0.1,
+  "found": true,
+  "tries": 1,
+  "distance": 0.047619047619047616,
+  "seconds": 59.22
+ },
+ {
+  "motif": "winner_take_all",
+  "seed": 5,
+  "sd": 0.1,
+  "found": true,
+  "tries": 1,
+  "distance": 0.0625,
+  "seconds": 47.21
+ },
+ {
+  "motif": "winner_take_all",
+  "seed": 6,
+  "sd": 0.1,
+  "found": true,
+  "tries": 1,
+  "distance": 0.017188216661963202,
+  "seconds": 40.23
+ },
+ {
+  "motif": "winner_take_all",
+  "seed": 7,
+  "sd": 0.1,
+  "found": true,
+  "tries": 2,
+  "distance": 0.03144881972317431,
+  "seconds": 73.7
+ },
+ {
+  "motif": "winner_take_all",
+  "seed": 8,
+  "sd": 0.1,
+  "found": true,
+  "tries": 2,
+  "distance": 0.03582631158339229,
+  "seconds": 69.86
+ },
+ {
+  "motif": "winner_take_all",
+  "seed": 9,
+  "sd": 0.1,
+  "found": true,
+  "tries": 5,
+  "distance": 0.06666666666666665,
+  "seconds": 140.27
+ }
+]

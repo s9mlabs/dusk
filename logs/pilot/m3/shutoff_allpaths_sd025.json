@@ -1,0 +1,47 @@
+[
+ {
+  "motif": "global_shutoff",
+  "seed": 0,
+  "sd": 0.25,
+  "found": true,
+  "tries": 1,
+  "distance": 0.05808410229096628,
+  "seconds": 97.1
+ },
+ {
+  "motif": "global_shutoff",
+  "seed": 1,
+  "sd": 0.25,
+  "found": true,
+  "tries": 2,
+  "distance": 0.02597248745780704,
+  "seconds": 94.05
+ },
+ {
+  "motif": "global_shutoff",
+  "seed": 2,
+  "sd": 0.25,
+  "found": true,
+  "tries": 1,
+  "distance": 0.08333333333333337,
+  "seconds": 69.97
+ },
+ {
+  "motif": "global_shutoff",
+  "seed": 3,
+  "sd": 0.25,
+  "found": true,
+  "tries": 2,
+  "distance": 0.06277727588796374,
+  "seconds": 149.47
+ },
+ {
+  "motif": "global_shutoff",
+  "seed": 4,
+  "sd": 0.25,
+  "found": true,
+  "tries": 1,
+  "distance": 0.0625,
+  "seconds": 41.62
+ }
+]

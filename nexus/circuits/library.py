@@ -1,12 +1,19 @@
+import json
 from pathlib import Path
 import numpy as np
-from nexus.circuits.batch import BatchRunner
+
 from nexus.circuits.build import build_circuit
+from nexus.circuits.allpaths import measure_all_paths
+from nexus.circuits.batch import BatchRunner
 from nexus.circuits.corrupt import corrupt_wiring
 from nexus.circuits.graded import write_network
 from nexus.circuits.probe import V_HIGH, V_LOW, measure_circuit
 from nexus.circuits.write_run import write_run
 from nexus.perturb.protocol import DT, T_TRIAL, make_pokes, run_trials, trial_table
+
+def scaled_rates(rates, factor) -> dict:
+    """The wiring error settings with every value multiplied by factor."""
+    return {k: float(v) * factor for k, v in rates.items()}
 
 def sample_accepted(motif_name, common, motifs, seed, workdir, max_tries=10) -> dict:
     """Draw circuits from a motif until one passes the probe; give up after max_tries."""
@@ -14,7 +21,7 @@ def sample_accepted(motif_name, common, motifs, seed, workdir, max_tries=10) -> 
     circuit_id = f"{motif_name}_{seed:05d}"
     for i in range(max_tries):
         spec, roles = build_circuit(motif_name, common, motifs, np.random.default_rng([seed, i]), circuit_id)
-        m = measure_circuit(spec, roles, workdir / f"{circuit_id}_try{i}")
+        m = measure_all_paths(spec, roles, motifs[motif_name]["switch_type"], workdir / f"{circuit_id}_try{i}")
         reasons.append(m["reason"])
         if m["accepted"]:
             return {"spec": spec, "roles": roles, "measurement": m, "tries": i + 1, "reasons": reasons}
@@ -37,4 +44,9 @@ def generate_animal(motif_name, common, motifs, rates, seed, workdir, out_path, 
     bad = int(np.sum(~np.all(np.isfinite(v) & (v >= V_LOW) & (v <= V_HIGH), axis=(1, 2))))
     animal_id = f"{spec['circuit_id']}_a0"
     write_run(out_path, spec, roles, m, stored, rows, pokes, trials, v, hashes, seed, "", spec["circuit_id"], animal_id)
-    return {"accepted": True, "tries": s["tries"], "reasons": s["reasons"], "circuit_id": spec["circuit_id"], "animal_id": animal_id, "n_neurons": len(ids), "n_trials": len(trials), "n_bad_trials": bad, "datasheets": m["datasheets"], "gate_ratios": m["gate_ratios"], "cross_ratios": m["cross_ratios"]}
+    checks = {"base": {k: float(v) for k, v in rates.items()}}
+    for k, (label, factor) in enumerate((("half", 0.5), ("double", 2.0)), start=1):
+        checks[label] = {"rates": scaled_rates(rates, factor), "stored": corrupt_wiring(spec, scaled_rates(rates, factor), np.random.default_rng([seed, 1000 + k]))[0]}
+    checks_path = Path(out_path).with_suffix(".wiring_checks.json")
+    checks_path.write_text(json.dumps(checks, default=float))
+    return {"accepted": True, "tries": s["tries"], "reasons": s["reasons"], "circuit_id": spec["circuit_id"], "animal_id": animal_id, "n_neurons": len(ids), "n_trials": len(trials), "n_bad_trials": bad, "datasheets": m["datasheets"], "gate_ratios": m["gate_ratios"], "cross_ratios": m["cross_ratios"], "wiring_checks": str(checks_path)}
