@@ -1457,3 +1457,10 @@ The working clone moved to the Windows laptop (Abhiram, 6 November). `~/NEXUS` i
 github.com/s9mlabs/dusk, and code edits, commits, pushes, scripts, tests, installs and model runs all
 happen there. The Mac is only where Abhiram prompts Claude and where Claude SSHes into the laptop. The
 laptop pushes with an SSH key kept in `~/.ssh`, outside the repo.
+
+Udeern reviewed the revision 0.3 proposals on 10 November 2026 and sent the held-out public key. He
+recommended accepting items 1 to 8 (option b), 10 to 16, and option B for item 18, and asked for
+items 9, 17 and 18 to be settled before approval. `prereg/phase1-prereg-0.3.md` is the complete
+version 0.3 that does this. It is not approved or locked yet. Writing it turned up a mismatch: the
+corruption code draws strength errors in natural-log units, while the text says log10. Version 0.3
+uses log10 and the code changes to match, pending approval.
