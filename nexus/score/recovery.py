@@ -9,14 +9,14 @@ def field_recovered(interval, truth, prior_range, max_width=0.5) -> bool:
     return low <= truth <= high and (high - low) <= max_width * (prior_range[1] - prior_range[0])
 
 def order_agreement(pred_priority, true_priority) -> float:
-    """Share of gate pairs ranked in the same order as the planted priorities; 1.0 with fewer than two gates."""
+    """Share of gate pairs ranked in the same order as the planted priorities; a predicted tie counts as disagreement; 1.0 with fewer than two gates."""
     keys = sorted(true_priority)
     pairs = list(combinations(keys, 2))
     if len(pairs) == 0:
         return 1.0
     same = 0
     for a, b in pairs:
-        if (true_priority[a] < true_priority[b]) == (pred_priority[a] < pred_priority[b]):
+        if pred_priority[a] != pred_priority[b] and (true_priority[a] < true_priority[b]) == (pred_priority[a] < pred_priority[b]):
             same += 1
     return same / len(pairs)
 

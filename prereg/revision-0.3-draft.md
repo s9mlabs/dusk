@@ -3,7 +3,7 @@
 **Status: approved by Abhiram on 4 November 2026, including each recommendation and proposal
 below. Reviewed by Udeern on 10 November 2026, who asked for items 9, 17 and 18 to be settled
 first. The complete version 0.3 that settles them is [`phase1-prereg-0.3.md`](phase1-prereg-0.3.md),
-waiting on both approvals.** Written by Claude on 3 November 2026 for Abhiram and
+approved by both on 10 November 2026 and locked by `lock-0.3.json`.** Written by Claude on 3 November 2026 for Abhiram and
 Udeern. Version 0.2 ([`phase1-prereg.md`](phase1-prereg.md)) stays in force until this is
 approved, and then 0.3 is written out in full, hashed and timestamped. No held-out data
 exists, so none of these changes can have been shaped by held-out results.

@@ -1,10 +1,17 @@
 {
-  "provisional": true,
-  "note": "Placeholder rates. Not yet taken from a measured comparison of connectomes; replace with sourced values and a new pre-registration version before generating the library.",
+  "provisional": false,
+  "note": "Assumed test conditions, not measured biological error rates (pre-registration version 0.3, section 3). Strength errors multiply each weight by 10 to the power z, with z drawn from a normal distribution with mean 0 and standard deviation weight_sd_log.",
+  "units": {
+    "weight_sd_log": "log10"
+  },
   "rates": {
     "missing_edge": 0.1,
     "false_edge": 0.05,
     "sign_flip": 0.05,
     "weight_sd_log": 0.3
+  },
+  "checks": {
+    "half": 0.5,
+    "double": 2.0
   }
 }

@@ -1,11 +1,13 @@
 # Dusk Phase 1 pre-registration
 
-**Status: version 0.3, written in full for approval on 10 November 2026. Not yet approved and
-not yet locked.** Written by Claude for Abhiram Sribhashyam and Udeern Varanasi. Version 0.2
-([`phase1-prereg.md`](phase1-prereg.md), locked by `lock-0.2.json`) stays in force until both
-approve this exact text. Then this file and its thresholds are hashed and timestamped, and only
-after that is any held-out data generated. No held-out data exists, so nothing here can have
-been shaped by held-out results.
+**Status: version 0.3, approved 10 November 2026** by Abhiram Sribhashyam and Udeern Varanasi
+(Udeern's approval relayed by Abhiram). Written by Claude. Locked by `lock-0.3.json` and
+timestamped with OpenTimestamps before any held-out data was generated. It replaces version 0.2
+([`phase1-prereg.md`](phase1-prereg.md), locked by `lock-0.2.json`). No held-out data existed when
+it was written, so nothing here can have been shaped by held-out results.
+
+This document doesn't change from here. Any later change is a new, dated, timestamped version that
+says what changed and why.
 
 The proposals behind this version, with the reasons for each, are in
 [`revision-0.3-draft.md`](revision-0.3-draft.md). Abhiram approved them on 4 November 2026.
@@ -362,12 +364,12 @@ Settled for version 0.3 (proposed in `revision-0.3-draft.md`, approved by Abhira
 
 ## 11. Approval
 
-This exact text, at the commit named when it is locked, needs both approvals.
+Both approved this exact text, which `lock-0.3.json` hashes.
 
 | Name | Role | Decision | Date |
 |---|---|---|---|
-| Abhiram Sribhashyam | Founder | | |
-| Udeern Varanasi | Head of Research | | |
+| Abhiram Sribhashyam | Founder | Approved | 10 November 2026 |
+| Udeern Varanasi | Head of Research | Approved (relayed by Abhiram) | 10 November 2026 |
 
 ## 12. Changes from version 0.2
 

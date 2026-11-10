@@ -1472,3 +1472,13 @@ half and double wiring error diagrams for each animal to a `.wiring_checks.json`
 recording, leaving the frozen file format alone. The twin survey takes the perturbation size as an
 argument. Tests: `tests/test_m3_allpaths.py` and the existing generator and twin tests pass
 (17 and 9). Still waiting on approval: strength errors in log10 units, and the two scoring fixes.
+
+Pre-registration version 0.3 was approved by Abhiram and Udeern on 10 November 2026 (Udeern's
+approval relayed by Abhiram), with strength errors in log10 units. Before locking, the 7B made the
+approved changes: strength errors in log10 units (`corrupt.py`), `configs/corruption.json` marked as
+assumed test conditions, a predicted priority tie counted as disagreement (`recovery.py`), each kept
+circuit's ceiling samples floored at 0.1 after exclusion (`report.py`), `prereg/thresholds-0.3.json`,
+and `tests/test_rev03.py`. The full suite passed (325 passed, 10 skipped, 2 expected failures).
+`prereg/lock-0.3.json` hashes the document, the thresholds, both configs, the scoring code and its
+tests, and is timestamped with OpenTimestamps. No held-out data has been generated yet. The split
+manifest and the identifiable list are locked later, before any scoring, as in version 0.2.

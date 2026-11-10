@@ -73,7 +73,7 @@ def score_prediction(rows, model, thresholds, n_boot=10000) -> dict:
     floor = thresholds["prediction"]["noise_ceiling_floor"]; ci = thresholds["prediction"]["bootstrap_ci"]; margin = thresholds["tie"]["margin_fraction_of_ceiling"]
     samples = np.array([r["ceiling_samples"] for r in rows], dtype=float)
     keep = eligible(samples.mean(axis=1), floor)
-    kept = [r for r, k in zip(rows, keep) if k]; s = samples[keep]
+    kept = [r for r, k in zip(rows, keep) if k]; s = np.maximum(samples[keep], floor)
     score = lambda name: np.array([r["r"][name] for r in kept], dtype=float)
     comparisons = {}
     for b in ("baseline1_pooled", "baseline1_per_state"):

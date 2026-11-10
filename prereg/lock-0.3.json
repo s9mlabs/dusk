@@ -1,0 +1,17 @@
+{
+  "files": {
+    "configs/corruption.json": "4ab8f9d19a9034b4b59213cd5241be8903332b6707d084f4eb758c5427b0e256",
+    "configs/scoring_priors.json": "0f1966877364a2b41adc256edbe88e3d070e98dd2e47b532b88bce2061579abb",
+    "nexus/score/prediction.py": "5fd488d762e9c89e025e228748b8ea292aa353b5ee7d2fbb32bd923ba37eb2b0",
+    "nexus/score/recovery.py": "183d9cecad589eb826ab29222b375b51193085d5612d3c59680d69bb4f95e1fc",
+    "nexus/score/report.py": "2386d4c0990e6bf3f5a4b4eabc46915e8b6ddfad22862e4c2ff7fca6dd3f86f6",
+    "prereg/phase1-prereg-0.3.md": "4b05ba973cdefb0439e59867dd2f87b40e9a4eed5a280fc26a3d8334df5c61e6",
+    "prereg/thresholds-0.3.json": "ba4c0e4b71d3c1ed9ea31f7190194e8c3f169af2bee8846b0e2ff8232e95d1c2",
+    "tests/test_m4_prediction.py": "96898d028b39acc1f292473dcfd60b6b3a71d8ff9eaffb5a6c40caf7faedae01",
+    "tests/test_m4_recovery.py": "a7ab3c3f750e8444ec0503fceacd0b5cbfda999d71c848f93f78fcab4e9a3db2",
+    "tests/test_m4_report.py": "7ef375dd81198a350f0ebf974b672407f4d25bba6a60124e9f0e24640bb083bd",
+    "tests/test_m4_scales.py": "ffe4e981d5f068ad32f7d71538b694da0956aaa56f22421ec090c84465caabf2",
+    "tests/test_rev03.py": "1bfa3eacb5df50d6be6eeb669779c809374f8719fd2e9576c30c2c5d1bd555e9"
+  },
+  "schema_version": "0.1.0"
+}

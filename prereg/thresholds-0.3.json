@@ -1,0 +1,74 @@
+{
+  "schema_version": "0.1.0",
+  "status": "version 0.3, approved",
+  "library": {
+    "n_circuits": 5000,
+    "n_brain_states": 6,
+    "spiking_circuits": false,
+    "switch_types": ["release", "gain", "winner_take_all", "global_shutoff"],
+    "noise_seeds": 3,
+    "held_out_circuit_noise_seeds": 10,
+    "dt_ms": 0.2,
+    "priority_poke_min_response_mv": 0.5
+  },
+  "wiring_errors": {
+    "missing_edge": 0.1,
+    "false_edge": 0.05,
+    "sign_flip": 0.05,
+    "weight_sd_log10": 0.3,
+    "check_factors": [0.5, 2.0]
+  },
+  "recovery": {
+    "interval_level": 0.9,
+    "interval_level_scope": "joint_per_circuit",
+    "max_width_fraction_of_prior": 0.5,
+    "pass_fraction_of_switch_circuits": 0.8,
+    "predicted_tie_counts_as_disagreement": true
+  },
+  "identifiability": {
+    "posterior_level": 0.9,
+    "max_width_fraction_of_prior": 0.5,
+    "min_fraction_of_training_circuits": 0.8,
+    "min_planted_triggers": 20,
+    "folds": 5
+  },
+  "no_false_switch": {
+    "pass_fraction": 0.9
+  },
+  "degenerate_twins": {
+    "pass_fraction": 0.8,
+    "tolerance_fraction_of_prior": 0.1,
+    "max_tries": 20,
+    "perturbation_sd_ln": 0.25,
+    "perturbation_sd_ln_winner_take_all": 0.1
+  },
+  "leak": {
+    "max_median_fraction": 0.1
+  },
+  "prediction": {
+    "noise_ceiling_seeds": 10,
+    "noise_ceiling_floor": 0.1,
+    "floor_each_sample_after_exclusion": true,
+    "bootstrap_ci": 0.95
+  },
+  "tie": {
+    "margin_fraction_of_ceiling": 0.02
+  },
+  "held_out": {
+    "test_fraction": 0.2,
+    "val_fraction": 0.2,
+    "min_test_circuits_per_switch_type": 100,
+    "access_limit": 3
+  },
+  "exclusion": {
+    "v_min_mv": -150.0,
+    "v_max_mv": 80.0,
+    "max_excluded_runs_per_circuit": 0.1,
+    "max_excluded_circuits_per_type": 0.05
+  },
+  "reproducibility": {
+    "torch_cross_device_abs": 1e-06,
+    "graded_voltage_mv": 0.02,
+    "neuron_check_dt_ms": 0.0025
+  }
+}

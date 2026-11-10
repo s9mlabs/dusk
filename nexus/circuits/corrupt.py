@@ -26,7 +26,7 @@ def corrupt_wiring(spec, rates, rng) -> tuple:
             s["sign"] = "inh" if e["sign"] == "exc" else "exc"
             rows.append({"pre_neuron": e["pre"], "post_neuron": e["post"], "kind": "sign_flip", "true_weight": e["weight"], "stored_weight": e["weight"]})
         if rates["weight_sd_log"] > 0:
-            s["weight"] = float(e["weight"] * np.exp(rng.normal(0.0, rates["weight_sd_log"])))
+            s["weight"] = float(e["weight"] * 10.0 ** rng.normal(0.0, rates["weight_sd_log"]))
             rows.append({"pre_neuron": e["pre"], "post_neuron": e["post"], "kind": "weight_error", "true_weight": e["weight"], "stored_weight": s["weight"]})
         stored.append(s)
     ids = [n["id"] for n in spec["neurons"]]
