@@ -32,7 +32,13 @@
 >   Abhiram and Udeern (relayed). D3, D4 and D6 settled. 6 brain states (overrides D4's 4).
 >   No spiking circuits this phase: graded neurons, graded synapses and gap junctions only
 >   (overrides M3's spiking fly-like and mouse-like circuits). M6 is out of scope for this
->   version. D7 key holder: Udeern (Abhiram, 2026-11-03); no held-out data until Udeern's public key arrives.
+>   version. D7 key holder: Udeern (Abhiram, 2026-11-03).
+> - **Pre-registration version 0.3 (2026-11-10).** `prereg/phase1-prereg-0.3.md`, approved by
+>   Abhiram and Udeern (relayed), locked by `prereg/lock-0.3.json` and timestamped. It replaces
+>   0.2: 5,000 circuits, four switch types, joint 90% intervals per circuit, global shutoff
+>   measured on every path, wiring errors as assumed conditions with half and double checks,
+>   strength errors in log10 units, and Udeern's public key for the held-out answers. Thresholds
+>   are in `prereg/thresholds-0.3.json`. Never edit the files it locks.
 > - **Name and OSF (2026-11-02).** The program is now called Dusk (not an acronym). Code,
 >   repo and locked files keep "NEXUS". The approved prereg is registered at osf.io/yrghs
 >   (project osf.io/h9fg5), private under embargo until 2030-11-01. Abhiram asked Claude to do
