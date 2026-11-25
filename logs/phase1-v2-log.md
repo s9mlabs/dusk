@@ -1482,3 +1482,80 @@ and `tests/test_rev03.py`. The full suite passed (325 passed, 10 skipped, 2 expe
 `prereg/lock-0.3.json` hashes the document, the thresholds, both configs, the scoring code and its
 tests, and is timestamped with OpenTimestamps. No held-out data has been generated yet. The split
 manifest and the identifiable list are locked later, before any scoring, as in version 0.2.
+
+Work moved to Runpod (Abhiram, 24 and 25 November 2026). The laptop is out of reach. Abhiram approved
+phase A in this session on 25 November: one RTX 4090 Secure pod (`dusk-phase-a`, EU-RO-1, $0.89 per
+hour, 16 vCPUs) and a 50 GB network volume (`dusk-phase1`, id `6w3hyyoskc`) that holds the working
+clone at `/workspace/NEXUS`, the environment (`uv sync --frozen --extra gpu`) and the 7B under Ollama.
+Only the committed repo came across. The laptop-only material (about 54 GB in `outputs/`, `sbi-logs/`,
+`.venv`, `~/NEXUS.git.before-switch` and the `C:\Users\abhis\dusk_jobs` helpers) is not on the pod.
+
+Held-out encryption, written by the 7B on 25 November 2026 and not yet used to generate the library.
+Version 0.3 says the held-out answers and response targets are encrypted to Udeern's key inside the
+generator (section 7), with 10 noise seeds for held-out circuits (section 3). Until now the pieces
+existed (`encrypt_file`, `AccessLog`, `open_held_out`) but the generator did not use them.
+
+- `nexus/format/heldout.py`: the split for the library. Circuits, poke types and brain states are
+  split before generation with one seeded draw (`make_library_split`). Neurons are split per training
+  circuit with a seed fixed by the split seed and the circuit ID, because neuron IDs exist only after a
+  circuit is built. `withheld_mask` marks every (trial, neuron) whose voltage is test data: all of a
+  held-out circuit, and in training circuits every trial of a held-out poke type or brain state and
+  every trace of a held-out neuron. Held-out circuits get 10 noise seeds, the rest 3.
+- `trial_table` takes the number of noise seeds (3 by default, so nothing else changes).
+- `write_run` takes an optional mask, written as NaN with a `withheld` trial column and a
+  `withheld_mask` input, and a `hide_answers` switch for held-out circuits. With it the public file
+  has no ground truth, no circuit spec, no motif name in the description, no circuit seed and no
+  current hashes (either could identify the circuit), and only inputs, outputs and the brain-state
+  neuron in the roles.
+- `generate_animal_split` in `library.py`: writes the full file and a JSON of the answers, encrypts
+  both to the key holder (`<id>.private.nwb.age`, `<id>.private.json.age`), deletes the plain copies,
+  then writes the public file. A held-out circuit gets a random public ID, its probe folders are
+  deleted, and its result row carries no circuit ID and no datasheet. `generate_animal` is unchanged.
+- Tests: `tests/test_heldout.py`, 9 tests, all pass. They generate one held-out and one training
+  circuit with a throwaway key, decrypt the private files, and check that no plain private file is
+  left.
+
+Points this work turned up, for Abhiram and Udeern to decide:
+
+1. Neuron names give the motif away. Every motif names its neurons by role (`trig`, `G`, `R`, `UA`,
+   and so on), and these names are in every public file. For held-out circuits the switch type can be
+   read from the names. Fixing this means renaming neurons in public files; not done.
+2. The half and double wiring diagrams are three independent corruptions of the same true wiring. A
+   model that sees all three could vote out most errors. For held-out circuits they are now only in the
+   encrypted file. Whether the check runs need them public is open.
+3. Every held-out file is encrypted on its own. The access limit is 3 openings, so the opening
+   function has to treat the whole held-out set as one opening. Not built yet.
+4. Public training files now hold NaN where voltages are withheld. Code that reads them (for example
+   `load_animal`) has not been checked against NaN yet.
+5. If generation stops between writing the full file and encrypting it, a plain copy stays in the
+   work folder. Work folders must be wiped before anything is shared.
+
+Full suite on the pod: 334 passed, 10 skipped, 2 expected failures. The first run had 10 errors, all
+NEURON tests, because the pod image has no Java and jNeuroML needs it. After installing
+`default-jre-headless` the 10 pass. The Dockerfile does not install Java either; the laptop had it from
+WSL. Java sits on the pod's container disk, so it must be installed again on each new pod.
+
+Cross-device check (scripts `cloud_batch.py` and `cloud_compare.py`, written by the 7B). The first 50
+accepted pilot circuits of the four types whose generator did not change since the pilot
+(decoy_adaptation, decoy_shunt, plain, release) were generated again on the RTX 4090 and compared with
+the laptop pilot in `logs/pilot/m3/results.json`. All 50 match: acceptance, tries, neuron and trial
+counts, bad-trial counts, gate IDs, and all 110 datasheet values and ratios agree to full float
+precision (largest relative difference 0). File sizes agree to within 64 bytes. Voltage traces were
+not compared, because the laptop recordings stayed on the laptop. Global shutoff, gain and
+winner-take-all were rebuilt after the pilot and have no laptop reference.
+
+Speed on the RTX 4090 pod (16 vCPUs), 4 circuits per process of the same four types:
+
+| Processes | Circuits | Wall time | Circuits per hour |
+|---|---|---|---|
+| 1 | 4 | 189 s | 76 |
+| 2 | 8 | 176 s | 164 |
+| 4 | 16 | 262 s | 219 |
+| 8 | 32 | 422 s | 273 |
+
+One process runs these circuits 1.55 times faster than the laptop did (162 s against 251 s for the same
+four). The GPU sits at 100% from 4 processes on, so more processes add little; the run is limited by
+the GPU on this machine, not by the CPU as on the laptop. Eight processes give about 4.8 times the
+laptop's single-process rate. The 12-process step was stopped early for that reason. These numbers
+cover the lighter types only; winner-take-all (1,980 trials) and held-out circuits (10 seeds) cost more
+per circuit.

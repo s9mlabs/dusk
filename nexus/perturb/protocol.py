@@ -46,12 +46,12 @@ def make_pokes(spec, roles, rng):
         pokes.append({"poke_id": f"paired_both_{j}", "type": PAIRED_BOTH["type"], "target": c, "amplitude_mV": float(PAIRED_BOTH["amplitude_mV"]), "start_ms": float(POKE_START), "stop_ms": float(POKE_START + PAIRED_BOTH["duration_ms"]), "hold": f"{a}+{b}", "hold_mV": float(PAIRED_BOTH["hold_mV"])})
     return pokes
 
-def trial_table(pokes):
-    """Every poke under every brain state with every noise seed."""
+def trial_table(pokes, n_seeds=N_SEEDS):
+    """Every poke under every brain state with every noise seed (n_seeds seeds, 3 by default)."""
     trials = []
     for poke_index in range(len(pokes)):
         for state_index in range(len(STATES_MV)):
-            for seed_index in range(N_SEEDS):
+            for seed_index in range(n_seeds):
                 trials.append({"trial_id": len(trials), "poke_index": poke_index, "state_index": state_index, "seed_index": seed_index})
     return trials
 

@@ -1,17 +1,17 @@
 # NEXUS Phase 1 (v2): build the switch-finding test bench
 
-> **Status and overrides (read first; updated 2026-11-03).** The prompt below is kept as
+> **Status and overrides (read first; updated 2026-11-25).** The prompt below is kept as
 > written. Where this box and the prompt disagree, this box wins.
 >
 > - **Who writes code (overrides section 2, last paragraph).** Abhiram reinstated the
->   director-executor workflow on 2026-10-29: the local `qwen2.5-coder:7b` on the Windows rig
+>   director-executor workflow on 2026-10-29: the `qwen2.5-coder:7b` (now on the Runpod pod, below)
 >   writes all code (modules, tests, Dockerfile, pyproject, scripts). Claude directs, reviews,
 >   runs tests, and writes prose only (logs, reports, READMEs, prereg). Mechanics for talking to
 >   the 7B are in `archive/phase1-betse/CLAUDE.director-executor.md` ("How to Talk to the 7B")
 >   and `archive/phase1-betse/claude-md-addendum.md`. Logged as a deviation in
 >   `logs/phase1-v2-log.md`.
-> - **Rig access.** Use the SSH alias `ssh windows-rig` (host 100.66.69.108, user `abhis`); the
->   form `windows-rig@abhiram-lenovo` fails. The remote shell is PowerShell 5.1.
+> - **No laptop (Abhiram, 24 November 2026).** The Windows laptop (`windows-rig`) is out of reach.
+>   Do not plan work on it. Its lock rule in section 6 no longer applies.
 > - **Decisions D1 to D9:** proposed defaults accepted by Abhiram on 2026-10-29. Still open:
 >   Udeern's confirmation of D3, D4 and of Jaxley as primary (D6); the D7 key holder (placeholder
 >   key until named, no held-out data); D9 is answered: 0.82 is in version 4 of the Creamer preprint (see the log, 2026-11-04).
@@ -20,9 +20,15 @@
 > - **Branches (overrides D1 and section 7, 2026-11-02).** Abhiram asked for everything to be on
 >   `main`. `phase1-v2` stays the working branch, and `main` is fast-forwarded to it after each
 >   push. Making new *results* public still needs his go-ahead.
-> - **Where things run.** Everything happens in WSL2 on the rig, in the working clone of s9mlabs/dusk at `~/NEXUS`: code edits, commits, pushes, scripts, tests, installs and model runs. Nothing happens on the Mac except Abhiram's prompts and the SSH connection.
->   Cisco Secure Client (the UT VPN) cuts WSL off from the internet; disconnect it while the
->   rig needs the network.
+> - **Where things run (overrides sections 0.1 and 6, 25 November 2026).** Everything happens on
+>   rented Runpod pods: code edits, commits, pushes, scripts, tests, installs, the 7B and model
+>   runs. The working clone is `/workspace/NEXUS` on network volume `dusk-phase1` (id
+>   `6w3hyyoskc`, EU-RO-1), so it outlives any pod. The environment is `.venv` from
+>   `uv sync --frozen --extra gpu`. The 7B runs under Ollama on the pod, with its models in
+>   `/workspace/ollama`. Claude reaches the pod through the Runpod MCP tools (`exec-pod`).
+>   Nothing runs on the Mac except Abhiram's prompts. Stop the pod when a job ends.
+> - **Pushing.** The pod pushes over SSH with the deploy key `dusk-runpod-pod`, kept at
+>   `/workspace/.ssh/dusk_github` on the volume, outside the repo.
 > - **Cost rule (overrides M1's "except Cost before M6").** Per the new P0 protocol, the checker
 >   rejects a missing energy value by default; a caller must pass `allow_null_cost=True`, and
 >   each use is logged.
